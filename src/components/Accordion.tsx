@@ -1,48 +1,42 @@
 import {useState} from "react";
 
-type  AccordionProps = {
-    title: string
-}
+export type AccordionProps = {
+    title: string;
+    collapsed?: boolean;
+    onChange?: () => void;
+};
 
-export function Accordion({title}: AccordionProps) {
-    const [collapsed, setCollapsed] = useState(true)
+export function Accordion({title, collapsed, onChange}: AccordionProps) {
+    const [isCollapsed, setIsCollapsed] = useState(collapsed ?? true);
 
-
-    const resultCollapsed = () => {
-        setCollapsed((col) => !col)
-    }
+    const toggleCollapsed = () => {
+        setIsCollapsed((col) => !col);
+        onChange?.(); // вызываем коллбек при изменении состояния
+    };
 
     return (
         <>
-            <AccordionTitle title={title} onClick={resultCollapsed}/>
-            {collapsed && <AccordionBody/>}
+            <AccordionTitle title={title} onClick={toggleCollapsed}/>
+            {isCollapsed && <AccordionBody/>}
         </>
-    )
+    );
 }
-
 
 type TitleProps = {
-    title: string
-    onClick: () => void
-}
+    title: string;
+    onClick: () => void;
+};
 
 function AccordionTitle({title, onClick}: TitleProps) {
-    console.log('Accordion')
-    return (
-        <>
-            <h3 onClick={() => onClick()}>{title}</h3>
-        </>
-    )
+    return <h3 onClick={onClick}>{title}</h3>;
 }
 
-
 function AccordionBody() {
-    console.log('Accordion')
     return (
         <ul>
             <li>1</li>
             <li>2</li>
             <li>3</li>
         </ul>
-    )
+    );
 }
