@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useReducer} from "react";
 
 type AccordionItemType = {
     value: number;
@@ -13,18 +13,40 @@ export type AccordionProps = {
     onClickc: (value: number) => void; // ✅ правильный тип
 };
 
-export function Accordion({title, collapsed, onChange, items, onClickc}: AccordionProps) {
-    const [isCollapsed, setIsCollapsed] = useState(collapsed ?? true);
+type ActionType = {
+    type: string;
+}
+
+type StateType = {
+    collapsed: boolean
+}
+const TOGGLE_COLLAPSED = 'TOGGLE_COLLAPSED';
+
+const reducer = (state: StateType, action: ActionType): StateType => {
+    switch (action.type) {
+        case TOGGLE_COLLAPSED:
+            return {
+                ...state,
+                collapsed: !state.collapsed
+            }
+        default:
+            throw new Error('Unknown action type');
+    }
+}
+
+export function Accordion({title, onChange, items, onClickc}: AccordionProps) {
+    // const [isCollapsed, setIsCollapsed] = useState(collapsed ?? true);
+    const [state, dispatch] = useReducer(reducer, {collapsed: true})
 
     const toggleCollapsed = () => {
-        setIsCollapsed(prev => !prev);
+        dispatch({type: TOGGLE_COLLAPSED});
         onChange?.(); // вызываем колбэк
     };
 
     return (
         <>
             <AccordionTitle title={title} onClick={toggleCollapsed}/>
-            {!isCollapsed && <AccordionBody items={items} onClickc={onClickc}/>}
+            {state.collapsed && <AccordionBody items={items} onClickc={onClickc}/>}
         </>
     );
 }

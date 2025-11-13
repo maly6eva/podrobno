@@ -1,4 +1,4 @@
-import {Accordion} from "./components/Accordion.tsx";
+import {Accordion} from "./components/Accordion/Accordion.tsx";
 import {Rating, type RatingsPropsType} from "./components/Rating.tsx";
 import {OnOff} from "./components/OnOff.tsx";
 import {UnControlledRating} from "./components/UnControlledRating.tsx";
@@ -28,9 +28,9 @@ function App() {
             <Accordion title={'Ira'}/>
             <Accordion title={'Ton'}/>
             <div>
-                <OnOff on={switchOn} onChange={ setSwitchOn}/>
+                <OnOff on={switchOn} onChange={setSwitchOn}/>
                 <br/>
-                <UnContrilOnOff onChrom={ setOn}/>{on.toString()}
+                <UnContrilOnOff onChrom={setOn}/>{on.toString()}
             </div>
         </>
     )

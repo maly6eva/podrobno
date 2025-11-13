@@ -1,4 +1,4 @@
-import {Accordion} from './Accordion';
+import {Accordion} from './Accordion.tsx';
 import {action} from "storybook/actions";
 import {useState} from "react";
 
