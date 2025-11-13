@@ -1,23 +1,30 @@
 import {useState} from "react";
 
+type AccordionItemType = {
+    value: number;
+    title: string;
+};
+
 export type AccordionProps = {
     title: string;
     collapsed?: boolean;
     onChange?: () => void;
+    items: AccordionItemType[];
+    onClickc: (value: number) => void; // ✅ правильный тип
 };
 
-export function Accordion({title, collapsed, onChange}: AccordionProps) {
+export function Accordion({title, collapsed, onChange, items, onClickc}: AccordionProps) {
     const [isCollapsed, setIsCollapsed] = useState(collapsed ?? true);
 
     const toggleCollapsed = () => {
-        setIsCollapsed((col) => !col);
-        onChange?.(); // вызываем коллбек при изменении состояния
+        setIsCollapsed(prev => !prev);
+        onChange?.(); // вызываем колбэк
     };
 
     return (
         <>
             <AccordionTitle title={title} onClick={toggleCollapsed}/>
-            {isCollapsed && <AccordionBody/>}
+            {!isCollapsed && <AccordionBody items={items} onClickc={onClickc}/>}
         </>
     );
 }
@@ -31,12 +38,19 @@ function AccordionTitle({title, onClick}: TitleProps) {
     return <h3 onClick={onClick}>{title}</h3>;
 }
 
-function AccordionBody() {
+export type AccordionBodyProps = {
+    items: AccordionItemType[];
+    onClickc: (value: number) => void;
+};
+
+function AccordionBody({items, onClickc}: AccordionBodyProps) {
     return (
         <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
+            {items.map(i => (
+                <li key={i.value} onClick={() => onClickc(i.value)}>
+                    {i.title}
+                </li>
+            ))}
         </ul>
     );
 }

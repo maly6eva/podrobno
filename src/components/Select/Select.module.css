@@ -1,0 +1,38 @@
+.select {
+    position: relative;
+    display: inline-block;
+    font-family: sans-serif;
+}
+
+.main {
+    border: 1px solid black;
+    display: inline-block;
+    min-height: 20px;
+    min-width: 100px;
+    padding: 5px 10px;
+    cursor: pointer;
+    user-select: none;
+    background-color: white;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%; /* сразу под span */
+    left: 0;
+    border: 1px solid red;
+    background-color: white;
+    z-index: 10;
+    min-width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.option {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.option:hover,
+.selected {
+    background-color: blue;
+    color: white;
+}

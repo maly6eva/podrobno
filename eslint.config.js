@@ -26,4 +26,4 @@ export default tseslint.config([
         "react-refresh/only-export-component": "off",
       }
   },
-], storybook.configs["flat/recommended"]);
+], storybook.configs["flat/recommended"], storybook.configs["flat/recommended"]);
