@@ -1,4 +1,4 @@
-import {useReducer} from "react";
+import React, {useReducer} from "react";
 
 type AccordionItemType = {
     value: number;
@@ -34,7 +34,12 @@ const reducer = (state: StateType, action: ActionType): StateType => {
     }
 }
 
-export function Accordion({title, onChange, items, onClickc}: AccordionProps) {
+export const Accordion = React.memo(function Accordion({
+                                                           title,
+                                                           onChange,
+                                                           items,
+                                                           onClickc
+                                                       }: AccordionProps) {
     // const [isCollapsed, setIsCollapsed] = useState(collapsed ?? true);
     const [state, dispatch] = useReducer(reducer, {collapsed: true})
 
@@ -49,7 +54,7 @@ export function Accordion({title, onChange, items, onClickc}: AccordionProps) {
             {state.collapsed && <AccordionBody items={items} onClickc={onClickc}/>}
         </>
     );
-}
+})
 
 type TitleProps = {
     title: string;

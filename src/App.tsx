@@ -1,6 +1,6 @@
 import {Accordion} from "./components/Accordion/Accordion.tsx";
 import {Rating, type RatingsPropsType} from "./components/Rating.tsx";
-import {OnOff} from "./components/OnOff.tsx";
+import {OnOff} from "./components/Onoff/OnOff.tsx";
 import {UnControlledRating} from "./components/UnControlledRating.tsx";
 import {useState} from "react";
 import {UnContrilOnOff} from "./components/UnControlOnOff.tsx";

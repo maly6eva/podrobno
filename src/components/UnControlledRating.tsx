@@ -56,9 +56,9 @@ type StarProps = {
     setVal: () => void;
 }
 
-function Star({selected, setVal}: StarProps) {
+const Star = (function Star({selected, setVal}: StarProps) {
     return (
         <span onClick={() => setVal()}> {selected ? <b style={{color: 'red'}}>start</b>
             : "star"} </span>
     )
-}
+})
